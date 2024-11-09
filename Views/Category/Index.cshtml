@@ -1,0 +1,45 @@
+﻿@using _50DersteMvc.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLKATEGORILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Kategori ID</th>
+            <th>Katerigori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th>@x.KATEGORIID</th>
+                <td>@x.KATEGORIAD</td>
+                <td><a href="/Category/CategorySil/@x.KATEGORIID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Category/CategoryGetir/@x.KATEGORIID" class="btn btn-info">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<br />
+<a href="/Category/CategoryEkle/" class="btn btn-primary"> Yeni Kategori Ekle </a>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl1').DataTable();
+</script>
+
+
+

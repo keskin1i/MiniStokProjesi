@@ -1,0 +1,48 @@
+﻿@using _50DersteMvc.Models.Entity
+@model List<TBLURUNLER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ürün ID</th>
+            <th>Ürün Adı</th>
+            <th>Marka</th>
+            <th>Ürün Kategori</th>
+            <th>Fiyat</th>
+            <th>Stok</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th>@x.URUNID</th>
+                <td>@x.URUNAD</td>
+                <td>@x.MARKA</td>
+                <td>@(x.TBLKATEGORILER != null ? x.TBLKATEGORILER.KATEGORIAD : "Kategori Yok")</td>
+                <td>@x.FIYAT</td>
+                <td>@x.STOK</td>
+                <td><a href="/Urun/UrunSil/@x.URUNID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Urun/UrunGetir/@x.URUNID" class="btn btn-info">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a href="/Urun/UrunEkle/" class="btn btn-success"> Yeni Ürün Ekle </a>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl1').DataTable();
+</script>
